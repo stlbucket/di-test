@@ -9,7 +9,7 @@
       </p>
     </div>
   </UCard>
-  <!-- <DemoResidents /> -->
+  <DemoResidents />
   <!-- <DemoResidents v-if="environment === 'development'"  /> -->
 </template>
 

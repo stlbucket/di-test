@@ -1,4 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+// import defaultTheme from 'tailwindcss/defaultTheme'
 export default defineNuxtConfig({
   supabase: {
     redirect: false,
@@ -14,23 +15,39 @@ export default defineNuxtConfig({
       secure: true
     },
     clientOptions: {
-      auth: {
-        flowType: 'pkce',
-        detectSessionInUrl: true,
-        persistSession: true,
-        autoRefreshToken: true
-      },
+      // auth: {
+      //   flowType: 'pkce',
+      //   detectSessionInUrl: true,
+      //   persistSession: true,
+      //   autoRefreshToken: true
+      // },
     }
   },
-  devtools: { enabled: true },
+  imports: {
+    dirs: [
+      'lib'
+      ,'store'
+      ,'types'
+    ],
+    global: true
+  },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/supabase',
     'nuxt-graphql-client',
     '@pinia/nuxt',
-    // '@pinia-plugin-persistedstate/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
     'nuxt3-leaflet'
+  ],
+  pinia: {
+    autoImports: [
+      ['defineStore', 'definePiniaStore'],
+    ],
+  },
+  devtools: { enabled: true },
+  css: [
+    '@/assets/css/main.scss'
   ],
   'graphql-client': {
     codegen: false,
@@ -65,4 +82,62 @@ export default defineNuxtConfig({
       }
     }  
   },
+  components: {
+    "dirs": [
+      {
+        "path": "~/components/_common",
+        "global": true
+      },
+      {
+        "path": "~/components/Dev",
+        "global": true
+      },
+      {
+        "path": "~/components/Nav",
+        "global": true
+      },
+      {
+        "path": "~/components/App",
+        "global": true
+      },
+      {
+        "path": "~/components/Todo",
+        "global": true
+      },
+      {
+        "path": "~/components/Map",
+        "global": true
+      },
+      {
+        "path": "~/components/Loc",
+        "global": true
+      },
+      "~/components"
+    ]
+  },
+  ignore: [
+    "server/api/mutation-hooks/**"
+  ],
+  tailwindcss: {
+    config: {
+      theme: {
+        extend: {
+          colors: {
+            'bermuda': '#78dcca',
+            'ash-grey': {
+              100: '#B9C8CB',
+              200: '#A1B6BA',
+              300: '#8AA3A8',
+              400: '#729197',
+              500: '#5F7B81',
+              600: '#4E656A',
+              700: '#3D4E52',
+              800: '#2B383B',
+              900: '#1A2223',
+            },
+          }
+        }
+      }  
+    }
+  }
 })
