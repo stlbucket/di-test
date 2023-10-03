@@ -17,9 +17,28 @@
     "@nuxt/devtools": "latest",
     "nuxt": "^3.7.4",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.5"
+    "vue-router": "^4.2.5",
+    "@nuxt/ui": "^2.8.1",
+    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
+    "@types/node": "^18",
+    "graphile-export": "^0.0.2-beta.5",
+    "kysely": "^0.26.1",
+    "kysely-codegen": "^0.10.1",
+    "nuxt3-leaflet": "^1.0.12",
+    "sass": "^1.66.1",
+    "supabase": "^1.99.5"
   },
   "dependencies": {
-    "@nuxt/ui": "^2.9.0"
+    "@graphile/simplify-inflection": "^8.0.0-beta.3",
+    "@pinia/nuxt": "^0.4.11",
+    "@nuxtjs/supabase": "^1.1.2",
+    "graphile-utils": "^5.0.0-beta.12",
+    "nuxt-graphql-client": "^0.2.30",
+    "pg": "^8.11.3",
+    "pinia": "^2.1.6",
+    "postgraphile": "^5.0.0-beta.13"
+  },
+  "overrides": {
+    "@supabase/supabase-js": "2.37.0"
   }
 }
