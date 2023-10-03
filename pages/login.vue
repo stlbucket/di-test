@@ -13,13 +13,16 @@ const signInWithOtp = async () => {
 }
 </script>
 <template>
-  <div>
-    <button @click="signInWithOtp">
-      Sign In with E-Mail
-    </button>
+  <UCard>
+    <template #header>
+      <h1>Sign In</h1>
+    </template>
     <input
       v-model="email"
       type="email"
     />
-  </div>
+    <button @click="signInWithOtp">
+      Sign In with E-Mail
+    </button>
+  </UCard>
 </template>
