@@ -1,5 +1,40 @@
-<template>
-  <div class="flex flex-col w-full h-screen bg-green-400" id="app">
-    <div class="text-2xl justify-center items-center flex grow">TACOS</div>
+<!-- <template>
+  <div>
+    <pre>{{ JSON.stringify(useRuntimeConfig(),null,2) }}</pre>
+  </div>
+  <div>
+    <pre>{{ JSON.stringify(rtc,null,2) }}</pre>
   </div>
 </template>
+
+<script lang="ts" setup>
+  const rtc = ref()
+
+  const loadData = async () => {
+    const { data, error } = await useFetch('/api/rtc')
+
+    if (error.value) {
+      alert(error.value.message)
+    }
+
+    rtc.value = data.value
+  }
+  loadData()
+</script>
+ -->
+
+ <template>
+  <UContainer
+    :ui="{
+      base: 'mx-auto'
+    }"
+  >
+    <NuxtLayout>
+      <NuxtPage />
+    </NuxtLayout>
+  </UContainer>
+  <UNotifications />
+</template>
+
+<script lang="ts" setup>
+</script>
