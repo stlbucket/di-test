@@ -7,7 +7,7 @@
 begin;
   select app_fn.create_anchor_tenant(
     _name => 'Anchor Tenant'::citext
-    ,_email => 'stlbucket+fnb-super-admin@gmail.com'::citext
+    ,_email => 'bucket+proto-super-admin@function-bucket.net'::citext
   );
 commit;
 

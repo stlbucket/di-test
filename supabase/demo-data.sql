@@ -25,7 +25,7 @@
       raise notice '%', _user_info->>'email';
       perform app_fn.invite_user(
         _tenant_id => (select id from app.tenant where identifier = 'anchor')::uuid
-        ,_email => ('admin-'||(_user_info->>'email'))::citext
+        ,_email => ('bucket+admin-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
         ,_assignment_scope => 'admin'::app.license_type_assignment_scope
       );
 
@@ -33,7 +33,7 @@
       raise notice '%', _user_info->'email';
       perform app_fn.invite_user(
         _tenant_id => (select id from app.tenant where identifier = 'anchor')::uuid
-        ,_email => ('user-'||(_user_info->>'email'))::citext
+        ,_email => ('bucket+user-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
         ,_assignment_scope => 'user'::app.license_type_assignment_scope
       );
     END $$;
@@ -61,7 +61,7 @@
         _tenant := app_fn.create_tenant(
           _name => _tenant_name::citext
           ,_identifier => _tenant_identifier::citext
-          ,_email => ('admin-'||(_user_info->>'email'))::citext
+          ,_email => ('bucket+admin-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
           , _type => 'demo'::app.tenant_type
         );
         raise notice '%: %', _tenant.id, _tenant.name;
@@ -72,7 +72,7 @@
           raise notice '%: %', _tenant_identifier, _user_info->>'email';
           perform app_fn.invite_user(
             _tenant_id => _tenant.id::uuid
-            ,_email => ('user-'||(_user_info->>'email'))::citext
+            ,_email => ('bucket+user-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
             ,_assignment_scope => 'user'::app.license_type_assignment_scope
           );
         end loop;

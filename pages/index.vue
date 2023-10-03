@@ -1,12 +1,10 @@
 <template>
   <UCard>
     <template #header>
-      <h1 class="text-2xl font-bold">Tacos</h1>
+      <h1 class="Home Page">Tacos</h1>
+      <p>This is a prototype instance - all data is subject to removal at any time.</p>
     </template>
     <div>
-      <p>
-        Tacos are delicious. You can put anything you want on them.
-      </p>
     </div>
   </UCard>
   <DemoResidents />

@@ -133,9 +133,7 @@
 
   // HANDLERS FOR ALL TODOS
   const onAddSubtask = async (todo: Todo) => {
-    alert('hey')
     if (todoTree.value) {
-      alert('you')
       const result = await GqlCreateTodo({
         name: todo.name,
         description: todo.description,
