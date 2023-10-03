@@ -7,7 +7,7 @@
   },
   "scripts": {
     "start": "node .output/server/index.mjs",
-    "build": "nuxt build && node postbuild.js",
+    "build": "nuxt build && node postbuild.mjs",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
