@@ -34,8 +34,8 @@
             v-if="String(todoTree.type) === 'TASK'"
             icon="i-heroicons-minus-circle"
             size="xs"
-            color="white" 
             square 
+            color="white" 
             variant="solid" 
             title="Delete" 
             @click="onDelete"

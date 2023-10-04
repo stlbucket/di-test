@@ -13,9 +13,7 @@
         <UButton 
           icon="i-heroicons-bars-4"
           size="xs"
-          color="white" 
           square 
-          variant="solid" 
           title="Close Menu"
           @click="onToggleCollapsed"
         />
