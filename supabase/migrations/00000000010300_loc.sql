@@ -42,6 +42,11 @@ create table loc.location (
   state text,
   postal_code text,
   country text,
+  latlon geography (POINT),
   lat text,
   lon text
 );
+
+create index idx_location_latlon
+  on loc.location
+  using GIST (latlon);

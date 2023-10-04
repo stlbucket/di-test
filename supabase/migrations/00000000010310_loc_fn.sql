@@ -101,6 +101,7 @@ CREATE OR REPLACE FUNCTION loc_fn.create_location(
       state,
       postal_code,
       country,
+      latlon,
       lat,
       lon
     ) values (
@@ -113,6 +114,7 @@ CREATE OR REPLACE FUNCTION loc_fn.create_location(
       _location_info.state,
       _location_info.postal_code,
       _location_info.country,
+      st_point(coalesce(_location_info.lat::double precision,0::double precision)::double precision, coalesce(_location_info.lon::double precision, 0::double precision)::double precision),
       _location_info.lat,
       _location_info.lon
     )
