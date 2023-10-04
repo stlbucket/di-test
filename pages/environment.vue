@@ -37,7 +37,7 @@
         <pre>{{ JSON.stringify(useRuntimeConfig(),null,2) }}</pre>
       </div>
     </div>
-    <div class="card-row">
+    <!-- <div class="card-row">
       <div class="card">
         <div class="label">Server ENV</div>
         <pre>{{ JSON.stringify(env,null,2) }}</pre>
@@ -46,7 +46,7 @@
         <div class="label">Server Runtime Config</div>
         <pre>{{ JSON.stringify(rtc,null,2) }}</pre>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
