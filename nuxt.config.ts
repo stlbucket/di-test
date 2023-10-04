@@ -70,6 +70,7 @@ export default defineNuxtConfig({
     SUPABASE_URI: 'postgresql://postgres:postgres@localhost:54322/postgres',
     GQL_HOST: 'http://localhost:3000/api/graphql',
     public: {      
+      DEMO_MODE: true,
       GQL_HOST: 'http://localhost:3000/api/graphql',
       SUPABASE_URL: 'http://localhost:54321',
       SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0',
