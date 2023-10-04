@@ -44,7 +44,9 @@
       alert(error.message)
     } else {
       alert('Check your email inbox for the magic link!')
-      navigateTo('http://localhost:54324/monitor', {external: true})
+      if (process.env.environment === 'development') {
+        navigateTo('http://localhost:54324/monitor', {external: true})
+      }
     }
   }
 </script>
