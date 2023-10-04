@@ -35,8 +35,6 @@ export default defineEventHandler(async (event) => {
     throw new Error('NONE SHALL PASS')
   }
 
-  console.log('inviteResult', inviteResult)
-
   return {
     resident: resident,
     inviteResult: inviteResult
