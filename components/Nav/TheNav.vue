@@ -7,37 +7,35 @@
       }"
       :preventClose="false"
     >
-      <div :onFocusout="onToggleCollapsed">
-        <UCard
-          class="flex grow flex-col"
-        >
-          <UButton 
-            icon="i-heroicons-bars-4"
-            size="xs"
-            square 
-            title="Close Menu"
-            @click="onToggleCollapsed"
-          />
-          <div class="flex flex-col grow">
-            <div v-if="showNav.todo">
-              <div v-if="showNav.all">Todo</div>
-              <TodoNav />
-            </div>
-            <div v-if="showNav.tools">
-              <div v-if="showNav.all">Tools</div>
-              <ToolsNav />
-            </div>
-            <div v-if="showNav.tenantAdmin">
-              <div v-if="showNav.all">Admin</div>
-              <TenantAdminNav />    
-            </div>
-            <div v-if="showNav.siteAdmin">
-              <div v-if="showNav.all">Site Admin</div>
-              <SiteAdminNav />    
-            </div>
+    <UCard
+        class="flex grow flex-col"
+      >
+        <UButton 
+          icon="i-heroicons-bars-4"
+          size="xs"
+          square 
+          title="Close Menu"
+          @click="onToggleCollapsed"
+        />
+        <div class="flex flex-col grow">
+          <div v-if="showNav.todo">
+            <div v-if="showNav.all">Todo</div>
+            <TodoNav />
           </div>
-        </UCard>
-      </div>
+          <div v-if="showNav.tools">
+            <div v-if="showNav.all">Tools</div>
+            <ToolsNav />
+          </div>
+          <div v-if="showNav.tenantAdmin">
+            <div v-if="showNav.all">Admin</div>
+            <TenantAdminNav />    
+          </div>
+          <div v-if="showNav.siteAdmin">
+            <div v-if="showNav.all">Site Admin</div>
+            <SiteAdminNav />    
+          </div>
+        </div>
+      </UCard>
     </USlideover>
 </template>
 
