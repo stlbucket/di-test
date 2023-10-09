@@ -69,6 +69,56 @@ mutation UpdateTodoStatus(
                   createdAt
                   updatedAt
                   parentTodoId
+                    parentTodo {
+                      id
+                      name
+                      description
+                      type
+                      status
+                      createdAt
+                      updatedAt
+                      parentTodoId
+                      parentTodo {
+                        id
+                        name
+                        description
+                        type
+                        status
+                        createdAt
+                        updatedAt
+                        parentTodoId
+                        parentTodo {
+                          id
+                          name
+                          description
+                          type
+                          status
+                          createdAt
+                          updatedAt
+                          parentTodoId
+                          parentTodo {
+                            id
+                            name
+                            description
+                            type
+                            status
+                            createdAt
+                            updatedAt
+                            parentTodoId
+                            parentTodo {
+                              id
+                              name
+                              description
+                              type
+                              status
+                              createdAt
+                              updatedAt
+                              parentTodoId
+                            }
+                          }
+                        }
+                      }
+                    }
                 }
               }
             }
