@@ -10,7 +10,7 @@
       <NuxtLink :to="`/admin/app-tenant-residencies/${row.id}`">{{ row.email }}</NuxtLink>
     </template>
     <template #assume-data="{ row }">
-      <UButton @click="onAssume(row)">{{ String(row.status).toLowerCase() === 'active' ? 'Refresh' : 'Assume' }}</UButton>
+      <UButton @click="onAssume(row)">{{ String(row.status).toLowerCase() === 'active' ? 'Refresh' : 'Select' }}</UButton>
     </template>
     <template #decline-data="{ row }">
       <UButton v-if="String(row.status).toLowerCase() === 'invited'" @click="onDecline(row)" color="red">Decline</UButton>

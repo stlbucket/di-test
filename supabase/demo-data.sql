@@ -221,7 +221,7 @@
           _resident_id => resident_id::uuid
           ,_name => 'Beer'::citext
           ,_options => row(
-            ''::citext
+            'get-beer'::citext
             ,id::uuid
             ,'{}'::citext[]
             ,false
@@ -230,6 +230,32 @@
         ) from todo.todo
         where description = 'get-supplies'::citext
         ;
+          select todo_fn.create_todo(
+            _resident_id => resident_id::uuid
+            ,_name => 'Ranier'::citext
+            ,_options => row(
+              'good beer'::citext
+              ,id::uuid
+              ,'{}'::citext[]
+              ,false
+              ,null
+            )::todo_fn.create_todo_options
+          ) from todo.todo
+          where description = 'get-beer'::citext
+          ;
+          select todo_fn.create_todo(
+            _resident_id => resident_id::uuid
+            ,_name => 'Coors'::citext
+            ,_options => row(
+              'bad beer'::citext
+              ,id::uuid
+              ,'{}'::citext[]
+              ,false
+              ,null
+            )::todo_fn.create_todo_options
+          ) from todo.todo
+          where description = 'get-beer'::citext
+          ;
 
       select todo_fn.create_todo(
         _resident_id => resident_id::uuid
