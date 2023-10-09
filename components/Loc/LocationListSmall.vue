@@ -39,13 +39,7 @@
         <div class="flex justify-center">NO SELECTED LOCATIONS</div>
       </template>
     </UTable>
-    <div class="">
-      <UInput 
-        v-model="searchTerm" 
-        placeholder="Search locations..." 
-        data-1p-ignore
-        class="grow"
-      />
+    <div class="flex">
       <UButton
         @click="searchTerm = undefined"
         icon="i-heroicons-x-mark"
@@ -56,6 +50,12 @@
         title="Clear Search Term"
         class=""
       ></UButton>
+      <UInput 
+        v-model="searchTerm" 
+        placeholder="Search locations..." 
+        data-1p-ignore
+        class="grow"
+      />
     </div>
     <UTable
       :rows="filteredLocations"
@@ -72,6 +72,12 @@
         }
       }"
     >
+      <template #action-data="{ row }">
+        <LocationModal
+          :location="row"
+          @update-location="onUpdateLocation"
+        ></LocationModal>
+      </template>
       <template #loc-data="{ row }">
         <LocationCard :location="row"/>
       </template>
