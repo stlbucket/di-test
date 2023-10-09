@@ -7,7 +7,7 @@ const pgl = postgraphile(preset);
 const serv = pgl.createServ(grafserv);
 
 export default defineEventHandler(async (event) => {
-  return serv.handleEvent(event)  
+  return serv.handleGraphQLEvent(event)  
 })
 
 export { serv }

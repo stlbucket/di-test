@@ -39,7 +39,7 @@
         <div class="flex justify-center">NO SELECTED LOCATIONS</div>
       </template>
     </UTable>
-    <div class="flex justify-right grow">
+    <div class="">
       <UInput 
         v-model="searchTerm" 
         placeholder="Search locations..." 

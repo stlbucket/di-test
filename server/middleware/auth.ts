@@ -25,6 +25,7 @@ export default defineEventHandler(async (event) => {
       // the session will be used later by graphql
       event.context.session = session || 'INVALID SESSION'  
     }
+    // console.log('auth middleware', event.context.session)
   } catch(e: any) {
     console.log('AUTH ERROR', e)
     throw e

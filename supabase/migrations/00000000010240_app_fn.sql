@@ -703,6 +703,7 @@ CREATE OR REPLACE FUNCTION app_fn.my_profile_residencies(_email text)
   DECLARE
     
   BEGIN
+    -- raise exception '%', auth.jwt();
     return query
     select aut.*
     from app.resident aut

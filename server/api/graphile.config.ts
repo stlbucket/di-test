@@ -1,6 +1,5 @@
 // Only needed for TypeScript types support
 import "postgraphile";
-// Use the 'pg' module to connect to the database
 import { PgSimplifyInflectionPreset } from "@graphile/simplify-inflection";
 import { PostGraphileAmberPreset as amber} from "postgraphile/presets/amber";
 // Use the 'pg' module to connect to the database
@@ -64,7 +63,6 @@ const preset: GraphileConfig.Preset = {
         'request.jwt.claim.email': claims?.email,
         'request.jwt.claim': JSON.stringify(claims)
       }
-      // console.log('additionalSettings', additionalSettings)
       return {
         pgSettings: {
           ...args.contextValue?.pgSettings,

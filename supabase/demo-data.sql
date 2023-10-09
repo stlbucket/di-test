@@ -22,7 +22,6 @@
       _user_info jsonb;
     BEGIN
       select ((to_json(http_get('https://randomuser.me/api/'))->>'content')::jsonb->'results')->0 into _user_info;
-      raise notice '%', _user_info->>'email';
       perform app_fn.invite_user(
         _tenant_id => (select id from app.tenant where identifier = 'anchor')::uuid
         ,_email => ('bucket+admin-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
@@ -30,7 +29,6 @@
       );
 
       select ((to_json(http_get('https://randomuser.me/api/'))->>'content')::jsonb->'results')->0 into _user_info;
-      raise notice '%', _user_info->'email';
       perform app_fn.invite_user(
         _tenant_id => (select id from app.tenant where identifier = 'anchor')::uuid
         ,_email => ('bucket+user-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
@@ -57,19 +55,16 @@
         _tenant_identifier = ('demo-tenant-'||(select count(*) from app.tenant))::citext;
 
         _user_info := _users->0;
-        raise notice '%: %', _tenant_identifier, _user_info->>'email';
         _tenant := app_fn.create_tenant(
           _name => _tenant_name::citext
           ,_identifier => _tenant_identifier::citext
           ,_email => ('bucket+admin-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
           , _type => 'demo'::app.tenant_type
         );
-        raise notice '%: %', _tenant.id, _tenant.name;
 
         -- ADDITIONAL USERS
         for _j in 1..2 loop
           _user_info := _users->_j;
-          raise notice '%: %', _tenant_identifier, _user_info->>'email';
           perform app_fn.invite_user(
             _tenant_id => _tenant.id::uuid
             ,_email => ('bucket+user-'||(split_part(_user_info->>'email','@',1))||'@function-bucket.net')::citext
