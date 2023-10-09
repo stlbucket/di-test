@@ -106,11 +106,11 @@
 
   // GRAPHQL QUERIES
   const shallowRefresh = async () => {
-    const result = await GqlTodoById({
+    const result = await GqlTodoByIdForRefresh({
       id: props.todoId,
     })
-    shallowMerge(result.todo) 
-    emit('updated', todoTree.value as Todo)
+    todoTree.value.status = result.todo.status
+    emit('updated', result.todo.parentTodo)
   }
   const loadData = async () => {
     const result = await GqlTodoById({

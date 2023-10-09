@@ -1,12 +1,10 @@
-mutation UpdateTodoStatus(
-  $todoId: UUID!
-  $status: TodoStatus!
+query TodoByIdForRefresh(
+  $id: UUID!
 ) {
-  updateTodoStatus(input:{
-    _todoId: $todoId
-    _status: $status
-  }) {
-    todo {
+  todo(id: $id) {
+    id
+    status
+    parentTodo {
       id
       status
       parentTodo {
@@ -39,10 +37,6 @@ mutation UpdateTodoStatus(
                         parentTodo {
                           id
                           status
-                          parentTodo {
-                            id
-                            status
-                          }
                         }
                       }
                     }
