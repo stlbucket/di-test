@@ -171,7 +171,7 @@
         status: 'COMPLETE'
       })
       todoTree.value.status = result.updateTodoStatus.todo.status
-      emit('updated', result.updateTodoStatus.todo)
+      emit('updated', result.updateTodoStatus.todo.parentTodo)
     }
   }
   const onReopened = async () => {
@@ -181,7 +181,7 @@
         status: 'INCOMPLETE'
       })
       todoTree.value.status = result.updateTodoStatus.todo.status
-      emit('updated', result.updateTodoStatus.todo)
+      emit('updated', result.updateTodoStatus.todo.parentTodo)
     }
   }
   const onDelete = async () => {
@@ -207,7 +207,11 @@
 
   // HANDLERS FOR CHILD ITEMS THAT BUBBLE UP THE TREE
   const handleChildUpdated = async (todo: Todo) => {
-    await shallowRefresh()
+    // await shallowRefresh()
+    todoTree.value.status = todo.status
+    if (todo.parentTodo) {
+      emit('updated', todo.parentTodo)
+    }
   }
   const handleChildAddSubtask = async (todo: Todo) => {
     await shallowRefresh()
