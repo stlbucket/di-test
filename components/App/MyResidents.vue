@@ -6,15 +6,29 @@
       }
     }">
       <template #header>
-        MY RESIDENCIES
+        <div class="flex justify-between">
+          <div>
+            ACTIVE RESIDENCY
+          </div>
+          <div>
+            {{ activeResidency ? activeResidency.tenantName : 'NONE' }}
+          </div>
+          <div>
+            <UButton
+              :disabled="changeResidencyDisabled"
+              @click="showModal = true"
+            >Change</UButton>
+          </div>
+        </div>
       </template>
-      {{ currentResidencyStatus }}
+      <div class="flex justify-center">
+        ALL OF MY RESIDENCIES
+      </div>
       <div class="flex">
         <ResidentsList
           title="MY APP USER TENANCIES" 
           :residents="residents"
           row-action-name="Assume"
-          @row-action="assumeResidency"
           disable-sort
         >
         </ResidentsList>
@@ -24,14 +38,18 @@
   <UModal v-model="showModal">
     <UCard :ui="{ divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
       <template #header>
-        Assume Residency
+        <div class="flex justify-center">
+          Assume Residency
+        </div>
       </template>
       <div class="flex flex-col gap-3">
         <ResidentsList
           title="Select Residency" 
-          :residents="assumableResidencies"
-          row-action-name="Assume"
-          @row-action="assumeResidency"
+          :residents="activeResidency ? [...assumableResidencies, activeResidency] : assumableResidencies"
+          :show-assume="true"
+          :show-decline="true"
+          @assume="assumeResidency"
+          @decline="declineResidency"
           disable-sort
         >
         </ResidentsList>
@@ -78,5 +96,18 @@
     reloadNuxtApp({path: '/my-profile', force: true})
   }
 
-  const assumableResidencies = computed(()=> residents.value.filter(r => ['inactive', 'invited', 'active'].indexOf(String(r.status).toLowerCase())))
+  const declineResidency = async (row: Resident) => {
+    const { data, error } = await GqlDeclineResident({
+      residentId: row.id
+    })
+    if (error) alert(error.toString())
+
+    await supabase.auth.refreshSession()
+    reloadNuxtApp({path: '/my-profile', force: true})
+  }
+
+  const activeResidency = computed(()=> residents.value.find(r => String(r.status).toLowerCase() === 'active'))
+  const assumableResidencies = computed(()=> residents.value.filter(r => ['inactive', 'invited'].indexOf(String(r.status).toLowerCase()) > -1))
+  // const changeResidencyDisabled = computed(()=> assumableResidencies.value.length === 0)
+  const changeResidencyDisabled = computed(()=> assumableResidencies.value.length === 0)
 </script>

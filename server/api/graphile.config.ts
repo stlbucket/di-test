@@ -56,7 +56,7 @@ const preset: GraphileConfig.Preset = {
         throw new Error(session)
       }
       const claims = session?.user
-      console.log('claims', claims)
+      // console.log('claims', claims)
       const additionalSettings = {
         role: claims?.aud || 'anon',
         'request.jwt.claim.sub': claims?.id,

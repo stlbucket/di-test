@@ -111,6 +111,50 @@ CREATE OR REPLACE FUNCTION app_fn.assume_residency(_resident_id uuid, _email cit
   $function$
   ;
 
+----------------------------------- decline_residency
+CREATE OR REPLACE FUNCTION app_api.decline_residency(_resident_id uuid)
+  RETURNS app.resident
+  LANGUAGE plpgsql
+  VOLATILE
+  SECURITY DEFINER
+  AS $function$
+  DECLARE
+    _resident app.resident;
+  BEGIN
+    _resident := app_fn.decline_residency(_resident_id, auth_ext.email());
+    return _resident;
+  end;
+  $function$
+  ;
+
+CREATE OR REPLACE FUNCTION app_fn.decline_residency(_resident_id uuid, _email citext)
+  RETURNS app.resident
+  LANGUAGE plpgsql
+  VOLATILE
+  SECURITY DEFINER
+  AS $function$
+  DECLARE
+    _resident app.resident;
+  BEGIN
+    select * into _resident from app.resident where id = _resident_id and email = _email;
+    if _resident.id is null then
+      raise exception '%, %, %', _resident_id, _email, _resident;
+    end if;
+
+    if _resident.id is not null then
+      update app.resident set 
+        status = 'declined' 
+        ,updated_at = current_timestamp 
+      where id = _resident_id
+      returning * 
+      into _resident;
+    end if;
+
+    return _resident;
+  end;
+  $function$
+  ;
+
 ----------------------------------- update_profile
 CREATE OR REPLACE FUNCTION app_api.update_profile(
     _display_name citext

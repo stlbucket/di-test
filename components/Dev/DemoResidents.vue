@@ -5,6 +5,7 @@
       <div class="flex flex-col justify-start md:flex-row md:gap-1 md:justify-between md:items-center">
         <div>DEMO TENANCIES</div>
         <div><UIcon name="i-heroicons-shield-exclamation"/><span class="text-xs border-2"> Look here for more info about this component: /supabase/seed.sql</span></div>
+        <a v-if="showInbucket" href="http://localhost:54324/monitor">Inbucket Monitor</a>
       </div>
     </template>
     <UTable
@@ -49,4 +50,8 @@
       }
     }
   }
+
+  const showInbucket = computed(() => {
+    return process.env.NODE_ENV === 'development'
+  })
 </script>
