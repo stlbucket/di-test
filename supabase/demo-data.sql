@@ -129,29 +129,6 @@
       end loop;
     END $$;
 
-  select msg_fn.upsert_subscriber(
-    row(
-      t.id
-      ,mu.resident_id
-    )
-  )
-  from msg.topic t
-  join msg.msg_resident mu on mu.tenant_id = t.tenant_id
-  ;
-
-  select msg_fn.upsert_message(
-    row(
-      null
-      ,t.id
-      ,('tacos are yummy...')::citext
-      ,null
-    )
-    ,mu.resident_id
-  )
-  from msg.topic t
-  join msg.msg_resident mu on mu.tenant_id = t.tenant_id
-  ;
-
 ------------------------------- TODO DEMO DATA
       select todo_fn.create_todo(
         _resident_id => (select id from app.resident where tenant_id = l.tenant_id order by random() limit 1)
@@ -296,3 +273,49 @@
         ) from todo.todo
         where description = 'dumpster'::citext
         ;
+
+    DO $$
+      BEGIN
+        perform msg_fn.upsert_subscriber(
+          row(
+            t.id
+            ,mu.resident_id
+          )
+        )
+        from msg.topic t
+        join msg.msg_resident mu on mu.tenant_id = t.tenant_id
+        ;
+    END $$;
+
+    DO $$
+      DECLARE
+        _i integer := 0;
+        _chunk_size integer := 30;
+        _subscriber msg.subscriber;
+        _quote citext;
+        _quote_json jsonb;
+      BEGIN
+        select (to_json(http_get('https://api.quotable.io/quotes/random?limit='||_chunk_size))) into _quote_json;
+
+        for _subscriber in
+          select * from msg.subscriber
+        loop
+          raise notice 'i: %', _i;
+          select (((_quote_json->>'content')::jsonb)->_i->>'content')::citext into _quote;
+          raise notice 'quote: %', _quote;
+
+          perform msg_fn.upsert_message(
+            row(
+              null
+              ,_subscriber.topic_id
+              ,_quote::citext
+              ,null
+            )
+            ,_subscriber.msg_resident_id
+          )
+          ;
+
+          _i := _i + 1;
+          if _i = _chunk_size then _i = 0; end if;
+        end loop;
+      END $$;

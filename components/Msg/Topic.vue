@@ -19,18 +19,19 @@
         >Send</UButton>
       </div>
       <div v-for="m in preppedMessages" class="flex flex-col">
-        <div :class="m.display.justify">
-          <div class="flex flex-col w-3/4 gap-0.5">
-            <div class="flex text-sm font-bold">{{ m.postedBy.displayName }}</div>
-            <div class="flex text-xs italic">{{ useFormatDateTimeString(m.createdAt) }}</div>
+        <div :class="m.display.topicContainer">
+          <div :class="m.display.msgContainer">
+            <div :class="m.display.displayName">{{ m.postedBy.displayName }}</div>
+            <div :class="m.display.createdAt">{{ useFormatDateTimeString(m.createdAt) }}</div>
             <div :class="m.display.content">
-              <UTextarea 
+              {{ m.content }}
+              <!-- <UTextarea
                 :model-value="m.content"
-                textareaClass="bg-red-400"
-                color="red"
-              />
+                :textarea-class="m.display.textArea"
+                :variant="'outline'"
+                color="bg-green-400"
+              /> -->
             </div>
-            <!-- <div :class="m.display.content">{{ m.content }}</div> -->
           </div>
         </div>
       </div>
@@ -57,11 +58,16 @@
 
   const preppedMessages = computed(() => {
     return topic.value?.messages.map(m => {
+      const side = user.value?.user_metadata.display_name === m.postedBy.displayName ? 'right' : 'left'
       return {
         ...m,
         display: {
-          justify: user.value?.user_metadata.display_name === m.postedBy.displayName ? 'flex justify-end' : 'flex justify-start',
-          content: user.value?.user_metadata.display_name === m.postedBy.displayName ? 'flex p-1 rounded grow break-normal' :  'flex p-1 rounded grow break-normal'
+          topicContainer: side === 'right' ? 'flex justify-end' : 'flex justify-start',
+          msgContainer: side === 'right' ? 'flex flex-col w-3/4 gap-0.5 justify-end' :  'flex flex-col w-3/4 gap-0.5 justify-start',
+          displayName: side === 'right' ? 'flex text-sm font-bold justify-end' :  'flex text-sm font-bold justify-start',
+          createdAt: side === 'right' ? 'flex text-xs italic justify-end' :  'flex text-xs italic justify-start',
+          content: side === 'right' ? 'flex p-1 rounded grow break-normal justify-end bg-green-400' :  'flex p-1 rounded grow break-normal justify-start bg-blue-400',
+          textArea: side === 'right' ? 'bg-green-400 flex flex-grow' :  'bg-blue-400 flex flex-grow',
         }
       }
     })
