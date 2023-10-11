@@ -33,7 +33,6 @@ create or replace function app_fn.handle_new_user()
 
     update app.resident set
       profile_id = new.id
-      -- ,status = 'active'
     where email = new.email
     and status != 'blocked_individual'
     and status != 'blocked_tenant'
@@ -42,7 +41,6 @@ create or replace function app_fn.handle_new_user()
     select * into _resident from app.resident where profile_id = new.id and status = 'active' limit 1;
 
     if _resident.id is not null then
-      -- this has to happen directly because this is inside a trigger
       _claims := to_jsonb(app_fn.current_profile_claims(_resident.profile_id));
       update auth.users set
         raw_user_meta_data = _claims
