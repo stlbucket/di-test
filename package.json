@@ -15,30 +15,30 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@pinia-plugin-persistedstate/nuxt": "^1.1.1",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2",
     "@types/node": "^18",
-    "graphile-export": "^0.0.2-beta.5",
-    "kysely": "^0.26.1",
-    "kysely-codegen": "^0.10.1",
-    "nuxt": "^3.7.4",
+    "graphile-export": "^0.0.2-beta.6",
+    "kysely": "^0.26.3",
+    "kysely-codegen": "^0.11.0",
+    "nuxt": "^3.8.2",
     "nuxt3-leaflet": "^1.0.12",
-    "sass": "^1.66.1",
-    "supabase": "^1.100.1",
-    "vue": "^3.3.4",
+    "sass": "^1.69.5",
+    "vue": "^3.3.9",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@graphile/simplify-inflection": "^8.0.0-beta.3",
-    "@nuxt/ui": "^2.9.0",
-    "@nuxtjs/supabase": "^1.1.3",
-    "@pinia/nuxt": "^0.4.11",
-    "graphile-utils": "^5.0.0-beta.12",
-    "nuxt-graphql-client": "^0.2.30",
+    "@graphile/simplify-inflection": "^8.0.0-beta.4",
+    "@nuxt/ui": "^2.11.0",
+    "@nuxtjs/supabase": "^1.1.4",
+    "@pinia/nuxt": "^0.5.1",
+    "graphile-utils": "^5.0.0-beta.15",
+    "nuxt-graphql-client": "^0.2.31",
     "pg": "^8.11.3",
-    "pinia": "^2.1.6",
-    "postgraphile": "^5.0.0-beta.14"
+    "pinia": "^2.1.7",
+    "postgraphile": "^5.0.0-beta.16",
+    "supabase": "^1.115.4"
   },
   "overrides": {
-    "@supabase/supabase-js": "2.38.0"
+    "@supabase/supabase-js": "2.39.0"
   }
 }
